@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 
 export const ButtonLoadMore = styled.button`
-  margin-left: auto;
-  margin-right: auto;
+  margin: 15px auto;
   padding: 8px 16px;
   border-radius: 2px;
   max-width: 100px;
   background-color: #3f51b5;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
+  display: block;
   color: #fff;
   border: 0;
   text-decoration: none;
