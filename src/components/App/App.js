@@ -4,7 +4,7 @@ import { ImageGallery } from 'components/ImageGallery';
 import { Searchbar } from 'components/Searchbar';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
-// import { AppStyled } from './App.styled';
+import { Text } from 'components/Text/Text.styled';
 
 export class App extends React.Component {
   state = {
@@ -13,6 +13,8 @@ export class App extends React.Component {
     showBtn: false,
     page: 1,
     isLoading: false,
+    isEmpty: false,
+    error: null,
   };
 
   componentDidUpdate(props, prevState) {
@@ -21,17 +23,31 @@ export class App extends React.Component {
       this.setState({ isLoading: true });
       fetchGallery(query, page)
         .then(data => {
+          if (!data.hits.length) {
+            this.setState({ isEmpty: true });
+            return;
+          }
           this.setState(prevState => ({
             images: [...prevState.images, ...data.hits],
             showBtn: page < Math.ceil(data.totalHits / 12),
           }));
+        })
+        .catch(err => {
+          this.setState({ error: err.message });
         })
         .finally(this.setState({ isLoading: false }));
     }
   }
 
   handleSubmit = query => {
-    this.setState({ query, images: [], showBtn: false });
+    this.setState({
+      query,
+      images: [],
+      showBtn: false,
+      isEmpty: false,
+      page: 1,
+      error: '',
+    });
   };
 
   loadMore = page => {
@@ -46,6 +62,11 @@ export class App extends React.Component {
         <ImageGallery images={images} />
         {showBtn && <Button page={page} loadMore={this.loadMore} />}
         {isLoading && <Loader />}
+
+        {this.state.error && <Text textAlign="center">{this.state.error}</Text>}
+        {this.state.isEmpty && (
+          <Text textAlign="center">Sorry. There are no images ... 😭</Text>
+        )}
       </>
     );
   }
