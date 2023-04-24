@@ -16,7 +16,7 @@ export class App extends React.Component {
   };
 
   componentDidUpdate(props, prevState) {
-    const { query, images, page } = this.state;
+    const { query, page } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ isLoading: true });
       fetchGallery(query, page)
