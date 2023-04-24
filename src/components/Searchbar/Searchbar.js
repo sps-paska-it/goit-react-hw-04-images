@@ -5,7 +5,7 @@ import {
   SearchFormButton,
   SearchFormInput,
 } from './Searchbar.styled';
-import { ReactComponent as Search } from 'icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 
 export class Searchbar extends React.Component {
   state = {
@@ -26,7 +26,7 @@ export class Searchbar extends React.Component {
       <SearchbarStyled>
         <SearchForm onSubmit={this.handleOnSubmit}>
           <SearchFormButton type="submit">
-            <Search width="25" />
+            <FiSearch size="25px" />
           </SearchFormButton>
           <SearchFormInput
             type="text"
