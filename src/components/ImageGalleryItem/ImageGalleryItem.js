@@ -3,10 +3,10 @@ import { GalleryItem, Image } from './ImageGalleryItem.styled';
 
 export class ImageGalleryItem extends React.Component {
   render() {
-    const { id, onOpenLargePhoto } = this.props;
+    const { id, onOpenLargePhoto, webformatURL } = this.props;
     return (
       <GalleryItem id={id} onClick={onOpenLargePhoto}>
-        <Image src={this.props.webformatURL} alt="" />
+        <Image src={webformatURL} alt="" />
       </GalleryItem>
     );
   }

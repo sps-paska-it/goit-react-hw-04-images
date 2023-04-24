@@ -4,7 +4,7 @@ import { ImageGallery } from 'components/ImageGallery';
 import { Searchbar } from 'components/Searchbar';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
-import { AppStyled } from './App.styled';
+// import { AppStyled } from './App.styled';
 
 export class App extends React.Component {
   state = {
@@ -41,12 +41,12 @@ export class App extends React.Component {
   render() {
     const { images, page, showBtn, isLoading } = this.state;
     return (
-      <AppStyled>
+      <>
         <Searchbar onSubmit={this.handleSubmit} />
         <ImageGallery images={images} />
         {showBtn && <Button page={page} loadMore={this.loadMore} />}
         {isLoading && <Loader />}
-      </AppStyled>
+      </>
     );
   }
 }
