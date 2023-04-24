@@ -21,7 +21,7 @@ export class Modal extends React.Component {
     window.removeEventListener('keydown', this.handleCloseImage);
   }
   render() {
-    const { largeImageURL, OnCloseImage } = this.props;
+    const { largeImageURL } = this.props;
     return createPortal(
       <Overlay onClick={this.handleCloseImage}>
         <ModalStyled>
