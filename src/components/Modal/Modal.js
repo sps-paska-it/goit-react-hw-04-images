@@ -6,24 +6,26 @@ const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends React.Component {
   componentDidMount() {
-    window.addEventListener('keydown', this.handleCloseImage);
+    window.addEventListener('keydown', this.handleCloseImageEscape);
   }
-
-  handleCloseImage = e => {
+  handleCloseImageEscape = e => {
     if (e.code === 'Escape') {
-      this.props.OnCloseImage(e);
-    }
-    if (e.currentTarget === e.target) {
-      this.props.OnCloseImage(e);
+      this.props.OnCloseImage();
     }
   };
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleCloseImage);
+    window.removeEventListener('keydown', this.handleCloseImageEscape);
   }
+
+  handleCloseImageMouse = e => {
+    if (e.currentTarget === e.target) {
+      this.props.OnCloseImage();
+    }
+  };
   render() {
     const { largeImageURL } = this.props;
     return createPortal(
-      <Overlay onClick={this.handleCloseImage}>
+      <Overlay onClick={this.handleCloseImageMouse}>
         <ModalStyled>
           <img src={largeImageURL} alt="" />
         </ModalStyled>

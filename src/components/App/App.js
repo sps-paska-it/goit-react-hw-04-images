@@ -50,17 +50,17 @@ export class App extends React.Component {
     });
   };
 
-  loadMore = page => {
-    this.setState({ page });
+  loadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
-    const { images, page, showBtn, isLoading } = this.state;
+    const { images, showBtn, isLoading } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleSubmit} />
         <ImageGallery images={images} />
-        {showBtn && <Button page={page} loadMore={this.loadMore} />}
+        {showBtn && <Button loadMore={this.loadMore} />}
         {isLoading && <Loader />}
 
         {this.state.error && <Text textAlign="center">{this.state.error}</Text>}
