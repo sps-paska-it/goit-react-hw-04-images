@@ -1,46 +1,35 @@
-import React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem';
 import { Modal } from 'components/Modal';
 import { GalleryList } from './ImageGallery.styled';
 
-export class ImageGallery extends React.Component {
-  state = {
-    idLargePhoto: '',
-  };
-  onOpenLargePhoto = e => {
-    this.setState({ idLargePhoto: e.currentTarget.id });
-  };
-  OnCloseImage = () => {
-    this.setState({ idLargePhoto: '' });
-  };
+export const ImageGallery = ({ images }) => {
+  const [idLargePhoto, setIdLargePhoto] = useState('');
 
-  render() {
-    const { idLargePhoto } = this.state;
-    return (
-      <GalleryList>
-        {this.props.images.map(obj => {
-          return (
-            <>
-              <ImageGalleryItem
-                key={obj.id}
-                id={obj.id}
-                webformatURL={obj.webformatURL}
-                onOpenLargePhoto={this.onOpenLargePhoto}
+  return (
+    <GalleryList>
+      {images.map(obj => {
+        return (
+          <>
+            <ImageGalleryItem
+              key={obj.id}
+              id={obj.id}
+              webformatURL={obj.webformatURL}
+              onOpenLargePhoto={e => setIdLargePhoto(e.currentTarget.id)}
+            />
+            {idLargePhoto === String(obj.id) && (
+              <Modal
+                largeImageURL={obj.largeImageURL}
+                OnCloseImage={e => setIdLargePhoto('')}
               />
-              {idLargePhoto === String(obj.id) && (
-                <Modal
-                  largeImageURL={obj.largeImageURL}
-                  OnCloseImage={this.OnCloseImage}
-                />
-              )}
-            </>
-          );
-        })}
-      </GalleryList>
-    );
-  }
-}
+            )}
+          </>
+        );
+      })}
+    </GalleryList>
+  );
+};
 
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(
