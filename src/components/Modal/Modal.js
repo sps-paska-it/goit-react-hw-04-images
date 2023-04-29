@@ -7,17 +7,16 @@ const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ OnCloseImage, largeImageURL }) => {
   useEffect(() => {
+    const handleCloseImageEscape = e => {
+      if (e.code === 'Escape') {
+        OnCloseImage();
+      }
+    };
     window.addEventListener('keydown', handleCloseImageEscape);
     return () => {
       window.removeEventListener('keydown', handleCloseImageEscape);
     };
-  }, []);
-
-  const handleCloseImageEscape = e => {
-    if (e.code === 'Escape') {
-      OnCloseImage();
-    }
-  };
+  }, [OnCloseImage]);
 
   const handleCloseImageMouse = e => {
     if (e.currentTarget === e.target) {

@@ -34,12 +34,15 @@ export const App = () => {
   }, [query, page]);
 
   const handleSubmit = query => {
-    setQuery(query);
-    setImages([]);
-    setShowBtn(false);
-    setEmpty(false);
-    setPage(1);
-    setError('');
+    setQuery(prevState => {
+      if (prevState === query) return query;
+      setImages([]);
+      setShowBtn(false);
+      setEmpty(false);
+      setPage(1);
+      setError('');
+      return query;
+    });
   };
 
   const loadMore = () => {
