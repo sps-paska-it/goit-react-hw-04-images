@@ -46,15 +46,15 @@ export const App = () => {
   };
 
   const loadMore = () => {
-    setPage(prevState => prevState.page + 1);
+    setPage(prevState => prevState + 1);
   };
 
   return (
     <>
+      {isLoading && <Loader />}
       <Searchbar onSubmit={handleSubmit} />
       <ImageGallery images={images} />
       {showBtn && <Button loadMore={loadMore} />}
-      {isLoading && <Loader />}
 
       {error && <Text textAlign="center">{error}</Text>}
       {isEmpty && (
