@@ -21,7 +21,7 @@ export const ImageGallery = ({ images }) => {
             {idLargePhoto === String(obj.id) && (
               <Modal
                 largeImageURL={obj.largeImageURL}
-                OnCloseImage={e => setIdLargePhoto('')}
+                onCloseImage={e => setIdLargePhoto('')}
               />
             )}
           </>

@@ -5,22 +5,22 @@ import { Overlay, ModalStyled } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = ({ OnCloseImage, largeImageURL }) => {
+export const Modal = ({ onCloseImage, largeImageURL }) => {
   useEffect(() => {
     const handleCloseImageEscape = e => {
       if (e.code === 'Escape') {
-        OnCloseImage();
+        onCloseImage();
       }
     };
     window.addEventListener('keydown', handleCloseImageEscape);
     return () => {
       window.removeEventListener('keydown', handleCloseImageEscape);
     };
-  }, [OnCloseImage]);
+  }, [onCloseImage]);
 
   const handleCloseImageMouse = e => {
     if (e.currentTarget === e.target) {
-      OnCloseImage();
+      onCloseImage();
     }
   };
 

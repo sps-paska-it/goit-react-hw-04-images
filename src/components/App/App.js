@@ -33,16 +33,15 @@ export const App = () => {
       .finally(setIsLoading(false));
   }, [query, page]);
 
-  const handleSubmit = query => {
-    setQuery(prevState => {
-      if (prevState === query) return query;
-      setImages([]);
-      setShowBtn(false);
-      setEmpty(false);
-      setPage(1);
-      setError('');
-      return query;
-    });
+  const handleSubmit = value => {
+    if (value === query) return;
+    setQuery(value);
+    setImages([]);
+    setShowBtn(false);
+    setEmpty(false);
+    setPage(1);
+    setError('');
+    return query;
   };
 
   const loadMore = () => {
